@@ -17,8 +17,8 @@ export const DATASET_TABLE_V1 = "dataset-table-v1" as const;
 export const columnRoleSchema = z.enum(["label", "period", "category", "value"]);
 
 export const datasetColumnSchema = z.object({
-	name: z.string().min(1).max(100),
-	role: columnRoleSchema.default("label"),
+  name: z.string().min(1).max(100),
+  role: columnRoleSchema.default("label"),
 });
 
 export const cellValueSchema = z.union([z.string().max(1000), z.number().finite(), z.null()]);
@@ -26,11 +26,11 @@ export const cellValueSchema = z.union([z.string().max(1000), z.number().finite(
 export const datasetRowSchema = z.record(z.string(), cellValueSchema);
 
 export const datasetTableV1Schema = z
-	.object({
-		name: z.string().min(1).max(200),
-		columns: z.array(datasetColumnSchema).min(1).max(20),
-		rows: z.array(datasetRowSchema).max(500),
-	})
-	.strict();
+  .object({
+    name: z.string().min(1).max(200),
+    columns: z.array(datasetColumnSchema).min(1).max(20),
+    rows: z.array(datasetRowSchema).max(500),
+  })
+  .strict();
 
 export type DatasetTableV1 = z.infer<typeof datasetTableV1Schema>;

@@ -1,79 +1,94 @@
 {
-	"valid-basic": {
-		"description": "Minimal valid dataset with one value column",
-		"data": {
-			"name": "Test",
-			"columns": [{ "name": "label", "role": "label" }, { "name": "count", "role": "value" }],
-			"rows": [{ "label": "A", "count": 1 }, { "label": "B", "count": null }]
-		},
-		"expect": "valid"
-	},
-	"valid-default-role": {
-		"description": "Column without explicit role defaults to label",
-		"data": {
-			"name": "Default",
-			"columns": [{ "name": "name" }, { "name": "amount", "role": "value" }],
-			"rows": [{ "name": "X", "amount": 3.14 }]
-		},
-		"expect": "valid"
-	},
-	"invalid-no-value-column": {
-		"description": "No column with role=value",
-		"data": {
-			"name": "NoValue",
-			"columns": [{ "name": "label", "role": "label" }],
-			"rows": [{ "label": "A" }]
-		},
-		"expect": "semantic_error",
-		"expectedCode": "missing_value_column"
-	},
-	"invalid-duplicate-columns": {
-		"description": "Two columns with same name (case-insensitive)",
-		"data": {
-			"name": "Dup",
-			"columns": [{ "name": "Name", "role": "label" }, { "name": "name", "role": "value" }],
-			"rows": [{ "Name": "A", "name": 1 }]
-		},
-		"expect": "semantic_error",
-		"expectedCode": "duplicate_column"
-	},
-	"invalid-row-missing-key": {
-		"description": "Row missing a declared column",
-		"data": {
-			"name": "Missing",
-			"columns": [{ "name": "a", "role": "value" }, { "name": "b", "role": "label" }],
-			"rows": [{ "a": 1 }]
-		},
-		"expect": "semantic_error",
-		"expectedCode": "missing_row_key"
-	},
-	"invalid-row-unknown-key": {
-		"description": "Row has an undeclared key",
-		"data": {
-			"name": "Extra",
-			"columns": [{ "name": "a", "role": "value" }],
-			"rows": [{ "a": 1, "b": "extra" }]
-		},
-		"expect": "semantic_error",
-		"expectedCode": "unknown_row_key"
-	},
-	"invalid-unrecognized-top-level": {
-		"description": "Unknown top-level property (strict contract)",
-		"data": {
-			"name": "Strict",
-			"schemaVersion": 1,
-			"columns": [{ "name": "a", "role": "value" }],
-			"rows": [{ "a": 1 }]
-		},
-		"expect": "schema_error"
-	},
-	"invalid-string-as-number": {
-		"description": "Value column contains a string instead of number",
-		"data": {
-			"name": "Type",
-			"columns": [{ "name": "label", "role": "label" }, { "name": "amount", "role": "value" }],
-			"rows": [{ "label": "A", "amount": "1,200" }]
-		},
-		"expect": "schema_error"
-	}
+  "valid-basic": {
+    "description": "Minimal valid dataset with one value column",
+    "data": {
+      "name": "Test",
+      "columns": [
+        { "name": "label", "role": "label" },
+        { "name": "count", "role": "value" }
+      ],
+      "rows": [
+        { "label": "A", "count": 1 },
+        { "label": "B", "count": null }
+      ]
+    },
+    "expect": "valid"
+  },
+  "valid-default-role": {
+    "description": "Column without explicit role defaults to label",
+    "data": {
+      "name": "Default",
+      "columns": [{ "name": "name" }, { "name": "amount", "role": "value" }],
+      "rows": [{ "name": "X", "amount": 3.14 }]
+    },
+    "expect": "valid"
+  },
+  "invalid-no-value-column": {
+    "description": "No column with role=value",
+    "data": {
+      "name": "NoValue",
+      "columns": [{ "name": "label", "role": "label" }],
+      "rows": [{ "label": "A" }]
+    },
+    "expect": "semantic_error",
+    "expectedCode": "missing_value_column"
+  },
+  "invalid-duplicate-columns": {
+    "description": "Two columns with same name (case-insensitive)",
+    "data": {
+      "name": "Dup",
+      "columns": [
+        { "name": "Name", "role": "label" },
+        { "name": "name", "role": "value" }
+      ],
+      "rows": [{ "Name": "A", "name": 1 }]
+    },
+    "expect": "semantic_error",
+    "expectedCode": "duplicate_column"
+  },
+  "invalid-row-missing-key": {
+    "description": "Row missing a declared column",
+    "data": {
+      "name": "Missing",
+      "columns": [
+        { "name": "a", "role": "value" },
+        { "name": "b", "role": "label" }
+      ],
+      "rows": [{ "a": 1 }]
+    },
+    "expect": "semantic_error",
+    "expectedCode": "missing_row_key"
+  },
+  "invalid-row-unknown-key": {
+    "description": "Row has an undeclared key",
+    "data": {
+      "name": "Extra",
+      "columns": [{ "name": "a", "role": "value" }],
+      "rows": [{ "a": 1, "b": "extra" }]
+    },
+    "expect": "semantic_error",
+    "expectedCode": "unknown_row_key"
+  },
+  "invalid-unrecognized-top-level": {
+    "description": "Unknown top-level property (strict contract)",
+    "data": {
+      "name": "Strict",
+      "schemaVersion": 1,
+      "columns": [{ "name": "a", "role": "value" }],
+      "rows": [{ "a": 1 }]
+    },
+    "expect": "schema_error"
+  },
+  "invalid-string-as-number": {
+    "description": "Value column contains a string instead of number",
+    "data": {
+      "name": "Type",
+      "columns": [
+        { "name": "label", "role": "label" },
+        { "name": "amount", "role": "value" }
+      ],
+      "rows": [{ "label": "A", "amount": "1,200" }]
+    },
+    "expect": "schema_error"
+  }
 }

@@ -10,16 +10,16 @@ A single JSON file that follows the [`dataset-table-v1` contract](../schemas/dat
 
 ```json
 {
-	"name": "Weekly requests",
-	"columns": [
-		{ "name": "week", "role": "period" },
-		{ "name": "channel", "role": "category" },
-		{ "name": "requests", "role": "value" }
-	],
-	"rows": [
-		{ "week": "2026-W40", "channel": "Advertising", "requests": 42 },
-		{ "week": "2026-W41", "channel": "Organic", "requests": null }
-	]
+  "name": "Weekly requests",
+  "columns": [
+    { "name": "week", "role": "period" },
+    { "name": "channel", "role": "category" },
+    { "name": "requests", "role": "value" }
+  ],
+  "rows": [
+    { "week": "2026-W40", "channel": "Advertising", "requests": 42 },
+    { "week": "2026-W41", "channel": "Organic", "requests": null }
+  ]
 }
 ```
 
@@ -30,8 +30,11 @@ A single JSON file that follows the [`dataset-table-v1` contract](../schemas/dat
    in the source systems.
 2. **Prepare a candidate first**: write to `./candidate.json`, never directly
    to `latest.json` or the published directory.
-3. **Validate before publishing**: run the validation CLI. Fix any issues it
-   reports (at most two rounds), then publish only on success.
+3. **Validate before publishing**: run the validation CLI —
+   `node packages/cli/index.mjs validate ./candidate.json` (exit 0 = valid;
+   it also enforces the 256 KiB file limit and rejects strings inside
+   `role=value` columns). Fix any issues it reports (at most two rounds),
+   then publish only on success.
 4. **Null means unknown**: use `null` when the value is genuinely unavailable;
    use `0` only when the measured value really is zero.
 5. **Numbers are JSON numbers**, not formatted strings (`42`, not `"42"` or `"1,200"`).
@@ -60,15 +63,15 @@ npx resultspace-data publish ./candidate.json --target ./published/latest.json
 
 ## Common validation errors
 
-| Code | Meaning | What to fix |
-|---|---|---|
-| `invalid_type` | Wrong type (e.g. string where number expected) | Check the column role; `value` columns need numbers or null |
-| `too_big` | File/rows/columns exceed limits | Narrow the period or aggregate upstream |
-| `duplicate_column` | Two columns share the same name | Rename one column |
-| `missing_row_key` | Row doesn't contain a declared column | Add the missing key or remove the column |
-| `unknown_row_key` | Row has an undeclared key | Remove the extra key or declare the column |
-| `missing_value_column` | No column with `role: "value"` | Mark a numeric column as value |
-| `unrecognized_keys` | Unknown top-level property | Remove it — the contract is strict |
+| Code                   | Meaning                                        | What to fix                                                 |
+| ---------------------- | ---------------------------------------------- | ----------------------------------------------------------- |
+| `invalid_type`         | Wrong type (e.g. string where number expected) | Check the column role; `value` columns need numbers or null |
+| `too_big`              | File/rows/columns exceed limits                | Narrow the period or aggregate upstream                     |
+| `duplicate_column`     | Two columns share the same name                | Rename one column                                           |
+| `missing_row_key`      | Row doesn't contain a declared column          | Add the missing key or remove the column                    |
+| `unknown_row_key`      | Row has an undeclared key                      | Remove the extra key or declare the column                  |
+| `missing_value_column` | No column with `role: "value"`                 | Mark a numeric column as value                              |
+| `unrecognized_keys`    | Unknown top-level property                     | Remove it — the contract is strict                          |
 
 ## What validation does NOT prove
 

@@ -1,27 +1,27 @@
 {
-	"name": "resultspace-data",
-	"version": "0.0.0",
-	"description": "Versioned contracts, JSON Schema exports and the resultspace-data CLI for external datasets consumed by ResultSpace widgets",
-	"private": true,
-	"type": "module",
-	"license": "MIT",
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/resultspace/resultspace-data.git"
-	},
-	"scripts": {
-		"generate:schemas": "node tools/generate-schemas.mjs",
-		"test": "node --test vectors/",
-		"format": "oxfmt .",
-		"format:check": "oxfmt --check .",
-		"lint": "oxlint ."
-	},
-	"devDependencies": {
-		"oxfmt": "^0.70.0",
-		"oxlint": "^1.86.0",
-		"zod": "^4.6.5"
-	},
-	"engines": {
-		"node": ">=20"
-	}
+  "name": "resultspace-data",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Versioned contracts, JSON Schema exports and the resultspace-data CLI for external datasets consumed by ResultSpace widgets",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/resultspace/resultspace-data.git"
+  },
+  "type": "module",
+  "scripts": {
+    "generate:schemas": "node tools/generate-schemas.mjs",
+    "test": "node --test packages/cli/test/",
+    "format": "oxfmt .",
+    "format:check": "oxfmt --check .",
+    "lint": "oxlint ."
+  },
+  "devDependencies": {
+    "oxfmt": "^0.70.0",
+    "oxlint": "^1.86.0",
+    "zod": "^4.6.5"
+  },
+  "engines": {
+    "node": ">=20"
+  }
 }

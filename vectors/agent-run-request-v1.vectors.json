@@ -1,0 +1,61 @@
+{
+  "run-valid-prompt": {
+    "description": "Minimal prompt run with one param",
+    "data": {
+      "preset": "weekly-report",
+      "kind": "prompt",
+      "params": {
+        "question": "Summarize Q3"
+      }
+    },
+    "expect": "valid"
+  },
+  "run-valid-command-callback": {
+    "description": "Command run with params, https callback and idempotency key",
+    "data": {
+      "preset": "rebuild-site",
+      "kind": "command",
+      "params": {
+        "target": "docs"
+      },
+      "callback": {
+        "url": "https://portal.example.com/cb",
+        "token": "abcdefgh1234"
+      },
+      "idempotencyKey": "run-42"
+    },
+    "expect": "valid"
+  },
+  "run-invalid-unknown-key": {
+    "description": "Unknown top-level key is rejected (strict evolution)",
+    "data": {
+      "preset": "p",
+      "kind": "prompt",
+      "params": {},
+      "deadline": "soon"
+    },
+    "expect": "schema_error"
+  },
+  "run-invalid-command-empty-params": {
+    "description": "Command preset without params is rejected",
+    "data": {
+      "preset": "rebuild",
+      "kind": "command",
+      "params": {}
+    },
+    "expect": "schema_error"
+  },
+  "run-invalid-callback-http": {
+    "description": "Callback URL must be https",
+    "data": {
+      "preset": "p",
+      "kind": "prompt",
+      "params": {},
+      "callback": {
+        "url": "http://x",
+        "token": "12345678"
+      }
+    },
+    "expect": "schema_error"
+  }
+}

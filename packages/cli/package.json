@@ -1,0 +1,43 @@
+{
+	"name": "resultspace-data",
+	"version": "0.1.0",
+	"private": false,
+	"description": "CLI for ResultSpace external datasets: validate a JSON file against the versioned dataset-table contract (structural Zod core + semantic rules), describe the contract, and self-check the conformance vectors.",
+	"keywords": [
+		"cli",
+		"dataset",
+		"json-schema",
+		"resultspace",
+		"validation"
+	],
+	"license": "MIT",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/resultspace/resultspace-data.git",
+		"directory": "packages/cli"
+	},
+	"bin": {
+		"resultspace-data": "./index.mjs"
+	},
+	"files": [
+		"index.mjs",
+		"lib/",
+		"../../contracts/",
+		"../../schemas/",
+		"../../vectors/"
+	],
+	"type": "module",
+	"scripts": {
+		"test": "node --test test/"
+	},
+	"dependencies": {
+		"@modelcontextprotocol/sdk": "^1.32.2",
+		"zod": "^4.6.5"
+	},
+	"engines": {
+		"node": ">=24"
+	},
+	"publishConfig": {
+		"access": "public"
+	}
+}

@@ -29,7 +29,31 @@ docs/          Guides for AI agents (OpenCode, Claude Code, Hermes) and integrat
 
 ## Status
 
-Initial scaffold — no npm release yet. See
+**CLI v2 (local, not yet on npm)**: three contracts + a read-only dataset server.
+
+```bash
+node packages/cli/index.mjs validate my-dataset.json                # dataset-table-v1 (default)
+node packages/cli/index.mjs validate run.json --contract agent-run-request-v1
+node packages/cli/index.mjs describe agent-response-v1              # any contract summary
+node packages/cli/index.mjs vectors                                 # 20/20 conformance vectors
+node packages/cli/index.mjs serve /data/datasets --http 8080 --bearer KEY   # read-only HTTP
+agentgateway …  resultspace-data serve /data/datasets               # stdio MCP target
+```
+
+- `agent-run-request-v1` — what ResultSpace sends to invoke a curated preset
+  (preset name is the allowlist key; strict, bounded params, https callback).
+- `agent-response-v1` — the normalized answer envelope (message/html/dataset/error
+  + optional approval/clarify). An embedded `dataset` is validated by the same
+  dataset-table-v1 core — one language for data everywhere.
+- `serve` exposes ONLY contract-valid datasets (list/read/describe/validate tools
+  over stdio MCP; plain GETs over HTTP; byte-gated, traversal-safe, optional bearer).
+
+The validator enforces the 256 KiB byte gate BEFORE parsing, then structure, then
+semantics. It is deliberately stricter than the server's structural acceptance in
+one place: a `role=value` column must contain only numbers/`null` (strings would
+break charts and KPI math — clean or aggregate the column upstream).
+
+`publish` and the npm release are still ahead; see
 [the backlog plan](https://github.com/resultspace/resultspace-app-saas/blob/main/docs/portal-prd/plan-customer-datasets-validation-and-sftpgo-live-path.ru.md)
 in the private app repository for the full delivery path.
 

@@ -1,0 +1,108 @@
+{
+  "resp-valid-message-interaction": {
+    "description": "Message with an approval interaction",
+    "data": {
+      "kind": "message",
+      "content": "Deploy to production?",
+      "interaction": {
+        "type": "approval",
+        "question": "Deploy?",
+        "options": ["yes", "no"]
+      }
+    },
+    "expect": "valid"
+  },
+  "resp-valid-dataset": {
+    "description": "Dataset answer validated by the shared dataset-table-v1 core",
+    "data": {
+      "kind": "dataset",
+      "dataset": {
+        "name": "Report",
+        "columns": [
+          {
+            "name": "m",
+            "role": "period"
+          },
+          {
+            "name": "v",
+            "role": "value"
+          }
+        ],
+        "rows": [
+          {
+            "m": "Jan",
+            "v": 1
+          },
+          {
+            "m": "Feb",
+            "v": null
+          }
+        ]
+      }
+    },
+    "expect": "valid"
+  },
+  "resp-valid-error": {
+    "description": "Structured error answer",
+    "data": {
+      "kind": "error",
+      "error": {
+        "code": "UPSTREAM_TIMEOUT",
+        "message": "agent did not answer in 30s"
+      }
+    },
+    "expect": "valid"
+  },
+  "resp-invalid-empty": {
+    "description": "kind=message without content",
+    "data": {
+      "kind": "message"
+    },
+    "expect": "schema_error"
+  },
+  "resp-invalid-two-payloads": {
+    "description": "content and error at once",
+    "data": {
+      "kind": "message",
+      "content": "hi",
+      "error": {
+        "code": "X",
+        "message": "why"
+      }
+    },
+    "expect": "schema_error"
+  },
+  "resp-invalid-dataset-payload": {
+    "description": "Embedded dataset fails the dataset contract (no value column)",
+    "data": {
+      "kind": "dataset",
+      "dataset": {
+        "name": "Bad",
+        "columns": [
+          {
+            "name": "m",
+            "role": "period"
+          }
+        ],
+        "rows": [
+          {
+            "m": "Jan"
+          }
+        ]
+      }
+    },
+    "expect": "semantic_error"
+  },
+  "resp-invalid-interaction-on-html": {
+    "description": "interaction only on kind=message",
+    "data": {
+      "kind": "html",
+      "content": "<b>x</b>",
+      "interaction": {
+        "type": "clarify",
+        "question": "?"
+      }
+    },
+    "expect": "schema_error"
+  }
+}
