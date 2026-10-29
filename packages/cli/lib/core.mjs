@@ -7,16 +7,15 @@
  * contracts carry their cross-field rules in superRefine.
  */
 import {
-  columnRoleSchema,
-  DATASET_TABLE_V1,
-  datasetTableV1Schema,
-} from "../vendor/contracts/dataset-table-v1.ts";
-import { validateDatasetTableSemantics } from "../vendor/contracts/semantic-rules.ts";
-import {
+  AGENT_RESPONSE_V1,
   AGENT_RUN_REQUEST_V1,
+  DATASET_TABLE_V1,
+  agentResponseSchema,
   agentRunRequestSchema,
-} from "../vendor/contracts/agent-run-request-v1.ts";
-import { AGENT_RESPONSE_V1, agentResponseSchema } from "../vendor/contracts/agent-response-v1.ts";
+  columnRoleSchema,
+  datasetTableV1Schema,
+  validateDatasetTableSemantics,
+} from "../vendor/contracts/contracts.mjs";
 
 export { DATASET_TABLE_V1, AGENT_RUN_REQUEST_V1, AGENT_RESPONSE_V1 };
 

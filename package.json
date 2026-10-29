@@ -17,6 +17,7 @@
     "lint": "oxlint ."
   },
   "devDependencies": {
+    "esbuild": "^0.28.2",
     "oxfmt": "^0.70.0",
     "oxlint": "^1.86.0",
     "zod": "^4.6.5"
