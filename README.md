@@ -43,8 +43,8 @@ agentgateway …  resultspace-data serve /data/datasets               # stdio MC
 - `agent-run-request-v1` — what ResultSpace sends to invoke a curated preset
   (preset name is the allowlist key; strict, bounded params, https callback).
 - `agent-response-v1` — the normalized answer envelope (message/html/dataset/error
-  + optional approval/clarify). An embedded `dataset` is validated by the same
-  dataset-table-v1 core — one language for data everywhere.
+  - optional approval/clarify). An embedded `dataset` is validated by the same
+    dataset-table-v1 core — one language for data everywhere.
 - `serve` exposes ONLY contract-valid datasets (list/read/describe/validate tools
   over stdio MCP; plain GETs over HTTP; byte-gated, traversal-safe, optional bearer).
 

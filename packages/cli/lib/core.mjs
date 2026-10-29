@@ -10,13 +10,13 @@ import {
   columnRoleSchema,
   DATASET_TABLE_V1,
   datasetTableV1Schema,
-} from "../../../contracts/dataset-table-v1.ts";
-import { validateDatasetTableSemantics } from "../../../contracts/semantic-rules.ts";
+} from "../vendor/contracts/dataset-table-v1.ts";
+import { validateDatasetTableSemantics } from "../vendor/contracts/semantic-rules.ts";
 import {
   AGENT_RUN_REQUEST_V1,
   agentRunRequestSchema,
-} from "../../../contracts/agent-run-request-v1.ts";
-import { AGENT_RESPONSE_V1, agentResponseSchema } from "../../../contracts/agent-response-v1.ts";
+} from "../vendor/contracts/agent-run-request-v1.ts";
+import { AGENT_RESPONSE_V1, agentResponseSchema } from "../vendor/contracts/agent-response-v1.ts";
 
 export { DATASET_TABLE_V1, AGENT_RUN_REQUEST_V1, AGENT_RESPONSE_V1 };
 

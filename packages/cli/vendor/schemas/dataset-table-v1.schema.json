@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/resultspace/resultspace-data/main/schemas/dataset-table-v1.schema.json",
+  "title": "ResultSpace Tabular Dataset (dataset-table-v1)",
+  "description": "ResultSpace tabular dataset: named columns with roles (label/period/category/value) and rows of string/number/null cells",
+  "type": "object",
+  "properties": {
+    "name": { "type": "string", "minLength": 1, "maxLength": 200 },
+    "columns": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 20,
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": { "type": "string", "minLength": 1, "maxLength": 100 },
+          "role": {
+            "type": "string",
+            "enum": ["label", "period", "category", "value"],
+            "default": "label"
+          }
+        },
+        "required": ["name"],
+        "additionalProperties": false
+      }
+    },
+    "rows": {
+      "type": "array",
+      "maxItems": 500,
+      "items": {
+        "type": "object",
+        "additionalProperties": {
+          "anyOf": [
+            { "type": "string", "maxLength": 1000 },
+            { "type": "number" },
+            { "type": "null" }
+          ]
+        }
+      }
+    }
+  },
+  "required": ["name", "columns", "rows"],
+  "additionalProperties": false
+}

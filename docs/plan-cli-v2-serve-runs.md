@@ -91,7 +91,6 @@ securely:
 Out-of-scope stays the same; template authoring blocked on a live instance (or
 official schema docs) — do not guess the schema.
 
-
 ## 8. Delivery: npm + skills (owner direction 2026-10-29)
 
 ONE distribution artifact — the published npm package `resultspace-data`:
@@ -115,12 +114,12 @@ ONE distribution artifact — the published npm package `resultspace-data`:
 `serve` is long-running — a skill must NOT be its supervisor (agent sessions are
 ephemeral). Correct homes:
 
-| Mode | Supervisor | Delivered via |
-| --- | --- | --- |
-| validate/describe/vectors (one-shot) | — | SKILL teaches npx |
-| serve (stdio MCP, agent tools) | agent runtime (claude mcp add / opencode config) | MCP registration line — the skill teaches it |
-| serve (stdio MCP, portal access) | agentgateway (spawns the target) | gateway config |
-| serve --http (portal data plane) | docker/systemd/dokploy | operator runbook |
+| Mode                                 | Supervisor                                       | Delivered via                                |
+| ------------------------------------ | ------------------------------------------------ | -------------------------------------------- |
+| validate/describe/vectors (one-shot) | —                                                | SKILL teaches npx                            |
+| serve (stdio MCP, agent tools)       | agent runtime (claude mcp add / opencode config) | MCP registration line — the skill teaches it |
+| serve (stdio MCP, portal access)     | agentgateway (spawns the target)                 | gateway config                               |
+| serve --http (portal data plane)     | docker/systemd/dokploy                           | operator runbook                             |
 
 So the package = skill (ad-hoc CLI + registration instructions) + MCP server
 (registered, runtime-supervised). A combination, by design.

@@ -10,7 +10,7 @@ import { CONTRACTS, validateContract } from "../lib/core.mjs";
 
 for (const contract of CONTRACTS) {
   const vectors = JSON.parse(
-    readFileSync(new URL(`../../../vectors/${contract}.vectors.json`, import.meta.url), "utf8"),
+    readFileSync(new URL(`../vendor/vectors/${contract}.vectors.json`, import.meta.url), "utf8"),
   );
   for (const [name, vector] of Object.entries(vectors)) {
     test(`vector: ${name} (${contract}, ${vector.expect})`, () => {
